@@ -1,8 +1,8 @@
 from flask import Flask, send_file, render_template, request
-import cv2 as cv
 from os import remove, mkdir, path
 from shutil import rmtree
 from werkzeug.utils import secure_filename
+import filters
 
 UPLOAD_FOLDER = 'temp'
 app = Flask(__name__)
@@ -16,12 +16,6 @@ def hello_world():
         fileName = secure_filename(userFile.filename)
         userFile.save(path.join(app.config['UPLOAD_FOLDER'], fileName))
         return "Uploaded"
-    img = cv.imread('testPic.jpg', 0)
-    try:
-        mkdir("temp")
-    except:
-        pass
-    cv.imwrite('temp/edit3.jpg', img)
     return render_template("index.html")
 
 
