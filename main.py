@@ -1,4 +1,4 @@
-from flask import Flask, send_file
+from flask import Flask, send_file, render_template
 import cv2 as cv
 app = Flask(__name__)
 
@@ -7,7 +7,7 @@ app = Flask(__name__)
 def hello_world():
     img = cv.imread('testPic.jpg', 0)
     cv.imwrite('temp/edit.jpg', img)
-    return send_file("temp/edit.jpg", as_attachment=True)
+    return render_template("index.html")
 
 
 if __name__ == "__main__":
