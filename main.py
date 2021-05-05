@@ -10,5 +10,10 @@ def hello_world():
     return render_template("index.html")
 
 
+@app.route("/download")
+def download():
+    return send_file("temp/edit.jpg", as_attachment=True)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
