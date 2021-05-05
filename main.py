@@ -15,15 +15,15 @@ def hello_world():
         userFile = request.files['uFile']
         fileName = secure_filename(userFile.filename)
         userFile.save(path.join(app.config['UPLOAD_FOLDER'], fileName))
-        makeGray(fileName)
-        return render_template("preview.html")
+        getName = makeGray(fileName)
+        return render_template("preview.html", name=getName)
     return render_template("index.html")
 
 
-@app.route("/download")
-def download():
+@app.route("/download/<string:name>")
+def download(name):
     try:
-        return send_file("temp/edit3.jpg", as_attachment=True)
+        return send_file(f"temp/{name}", as_attachment=True)
     except:
         return "Unable to Download"
     finally:
