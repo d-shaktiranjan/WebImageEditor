@@ -2,7 +2,7 @@ from flask import Flask, send_file, render_template, request
 from os import remove, mkdir, path
 from shutil import rmtree
 from werkzeug.utils import secure_filename
-import filters
+from filters import *
 
 UPLOAD_FOLDER = 'temp'
 app = Flask(__name__)
@@ -15,7 +15,8 @@ def hello_world():
         userFile = request.files['uFile']
         fileName = secure_filename(userFile.filename)
         userFile.save(path.join(app.config['UPLOAD_FOLDER'], fileName))
-        return "Uploaded"
+        makeGray(fileName)
+        return render_template("preview.html")
     return render_template("index.html")
 
 
