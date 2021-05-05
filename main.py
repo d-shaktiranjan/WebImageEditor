@@ -1,12 +1,21 @@
-from flask import Flask, send_file, render_template
+from flask import Flask, send_file, render_template, request
 import cv2 as cv
-from os import remove, mkdir
+from os import remove, mkdir, path
 from shutil import rmtree
+from werkzeug.utils import secure_filename
+
+UPLOAD_FOLDER = 'temp'
 app = Flask(__name__)
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def hello_world():
+    if request.method == "POST":
+        userFile = request.files['uFile']
+        fileName = secure_filename(userFile.filename)
+        userFile.save(path.join(app.config['UPLOAD_FOLDER'], fileName))
+        return "Uploaded"
     img = cv.imread('testPic.jpg', 0)
     try:
         mkdir("temp")

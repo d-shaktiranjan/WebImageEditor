@@ -4,24 +4,24 @@
 
 {% block body %}
 <div class="container my-2">
-        <form action="/" method="post">
-            <div class="mb-3">
-                <label for="formFile" class="form-label"></label>
-                <input class="form-control" type="file" id="uFile" name="uFile">
-            </div>
+    <form action="/" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="formFile" class="form-label"></label>
+            <input class="form-control" type="file" id="uFile" name="uFile">
+        </div>
 
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
-                <label class="form-check-label" for="flexRadioDefault1">
-                    Make Gray
-                </label>
-            </div>
-            <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="preview" name="preview">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Show Preview</label>
-            </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+            <label class="form-check-label" for="flexRadioDefault1">
+                Make Gray
+            </label>
+        </div>
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="preview" name="preview">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Show Preview</label>
+        </div>
 
-            <button type="submit" class="btn btn-primary">Generate</button>
-        </form>
-    </div>
+        <button type="submit" class="btn btn-primary">Generate</button>
+    </form>
+</div>
 {% endblock body %}
