@@ -14,6 +14,10 @@ def hello_world():
     if request.method == "POST":
         userFile = request.files['uFile']
         fileName = secure_filename(userFile.filename)
+        try:
+            mkdir("temp")
+        except:
+            pass
         userFile.save(path.join(app.config['UPLOAD_FOLDER'], fileName))
         getName = makeGray(fileName)
         return render_template("preview.html", name=getName)
