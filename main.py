@@ -4,7 +4,7 @@ from shutil import rmtree
 from werkzeug.utils import secure_filename
 from filters import *
 
-UPLOAD_FOLDER = 'temp'
+UPLOAD_FOLDER = 'static/temp'
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -15,19 +15,21 @@ def hello_world():
         userFile = request.files['uFile']
         fileName = secure_filename(userFile.filename)
         try:
-            mkdir("temp")
+            mkdir("static")
+            mkdir("static/temp")
         except:
             pass
         userFile.save(path.join(app.config['UPLOAD_FOLDER'], fileName))
         getName = makeGray(fileName)
-        return render_template("preview.html", name=getName)
+        filePath = path.join(app.config['UPLOAD_FOLDER'], f"{getName}")
+        return render_template("preview.html", name=getName, path=filePath)
     return render_template("index.html")
 
 
 @app.route("/download/<string:name>")
 def download(name):
     try:
-        return send_file(f"temp/{name}", as_attachment=True)
+        return send_file(f"static/temp/{name}", as_attachment=True)
     except:
         return "Unable to Download"
     finally:
