@@ -1,23 +1,29 @@
 {% extends 'base.html' %}
 
-{% block title %}{% endblock title %}
+{% block title %}Image Filter{% endblock title %}
 
 {% block body %}
 <div class="container my-2">
     <form action="/" method="post" enctype="multipart/form-data">
         <div class="mb-3">
             <label for="formFile" class="form-label"></label>
-            <input class="form-control" type="file" id="uFile" name="uFile">
+            <input class="form-control" type="file" id="uFile" name="uFile" required>
         </div>
 
         <div class="form-check">
-            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1" checked>
+            <input class="form-check-input" type="radio" name="filterName" id="flexRadioDefault1" value="gray">
             <label class="form-check-label" for="flexRadioDefault1">
                 Make Gray
             </label>
         </div>
+        <div class="form-check">
+            <input class="form-check-input" type="radio" name="filterName" id="flexRadioDefault2" value="red">
+            <label class="form-check-label" for="flexRadioDefault2">
+                Make Red
+            </label>
+        </div>
         <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" id="preview" name="preview">
+            <input class="form-check-input" type="checkbox" id="preview" name="preview" checked disabled>
             <label class="form-check-label" for="flexSwitchCheckDefault">Show Preview</label>
         </div>
 
