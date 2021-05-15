@@ -13,13 +13,20 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def hello_world():
     if request.method == "POST":
         userFile = request.files['uFile']
+        filterName = request.form.get("filterName")
         fileName = secure_filename(userFile.filename)
         try:
             mkdir("static/temp")
         except:
             pass
         userFile.save(path.join(app.config['UPLOAD_FOLDER'], fileName))
-        getName = makeGray(fileName)
+        getName = ""
+        if filterName == "gray":
+            getName = makeGray(fileName)
+        elif filterName == "red":
+            getName = makeRed(fileName)
+        else:
+            return render_template("index.html")
         filePath = path.join(app.config['UPLOAD_FOLDER'], f"{getName}")
         return render_template("preview.html", name=getName, path=filePath)
     return render_template("index.html")
