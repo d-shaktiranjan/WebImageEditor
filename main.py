@@ -15,7 +15,6 @@ def hello_world():
         userFile = request.files['uFile']
         fileName = secure_filename(userFile.filename)
         try:
-            mkdir("static")
             mkdir("static/temp")
         except:
             pass
